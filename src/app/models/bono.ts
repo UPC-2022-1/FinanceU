@@ -1,22 +1,23 @@
 export  class Bono{
 
-    private _valorNominal: number;
-    private _valorComercial: number;
-    private _numeroAnios: number;
-    private _frecuanciaCupon: number;
-    private _diasXAnio: number;
-    private _tipoTasaInteres: boolean;
-    private _capitalizacion: number;
-    private _tasaInteres: number;
-    private _tasaAnualDescuento: number;
-    private _fechaEmision: Date;
-    private _impuestoRenta: number;
-    private _prima: number;
-    private _estructuracion: number;
-    private _colocacion: number;
-    private _flotacion: number;
-    private _cavali: number;
-    private _tipoBono: string;
+    public moneda: string;
+    public valorNominal: number;
+    public valorComercial: number;
+    public numeroAnios: number;
+    public frecuanciaCupon: number;
+    public diasXAnio: number;
+    public tipoTasaInteres: boolean;
+    public capitalizacion: number;
+    public tasaInteres: number;
+    public tasaAnualDescuento: number;
+    public fechaEmision: Date;
+    public impuestoRenta: number;
+    public prima: number;
+    public estructuracion: number;
+    public colocacion: number;
+    public flotacion: number;
+    public cavali: number;
+    public tipoBono: string;
 
     constructor(){}
 }

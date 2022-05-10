@@ -6,23 +6,39 @@
         <div
             class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
         >
-            <form class="mt-8" [formGroup]="" #signInNgForm="ngForm">
+            <form
+                class="mt-8"
+                [formGroup]="bonoDataForm"
+                #bonoDataNgForm="ngForm"
+            >
                 <mat-form-field
-                    class="fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
+                    class="w-flex fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
+                >
+                    <mat-label>Moneda </mat-label>
+                    <input
+                        id="moneda"
+                        type="text"
+                        [formControlName]="'moneda'"
+                        matInput
+                        maxlength="3"
+                        placeholder="USD"
+                        [(ngModel)]="this.bono.moneda"
+                    />
+                </mat-form-field>
+                <mat-form-field
+                    class="w-flex fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
                 >
                     <mat-label>Valor Nominal </mat-label>
                     <input
                         id="valorNominal"
                         type="text"
+                        [formControlName]="'valorNominal'"
                         matInput
+                        maxlength="10"
                         appNumbersOnly
+                        placeholder="0"
+                        [(ngModel)]="this.bono.valorNominal"
                     />
-                </mat-form-field>
-                <mat-form-field
-                    class="fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                >
-                    <mat-label>Valor Comercial </mat-label>
-                    <input type="text" matInput />
                 </mat-form-field>
             </form>
         </div>
