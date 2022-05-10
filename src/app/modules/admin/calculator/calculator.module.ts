@@ -10,6 +10,7 @@ import { FuseCardModule } from '@fuse/components/card';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { CalculatorComponent } from './calculator.component';
+import { NumbersOnlyDirective } from 'app/directives/numbers-only.directive';
 
 const calculatorRoutes: Route[] = [
     {
@@ -20,7 +21,8 @@ const calculatorRoutes: Route[] = [
 
 @NgModule({
     declarations: [
-        CalculatorComponent
+        CalculatorComponent,
+        NumbersOnlyDirective,
     ],
     imports     : [
         RouterModule.forChild(calculatorRoutes),
