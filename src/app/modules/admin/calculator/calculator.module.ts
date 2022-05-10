@@ -11,6 +11,8 @@ import { FuseAlertModule } from '@fuse/components/alert';
 import { SharedModule } from 'app/shared/shared.module';
 import { CalculatorComponent } from './calculator.component';
 import { NumbersOnlyDirective } from 'app/directives/numbers-only.directive';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { FuseMasonryModule } from '@fuse/components/masonry';
 
 const calculatorRoutes: Route[] = [
     {
@@ -34,7 +36,9 @@ const calculatorRoutes: Route[] = [
         MatProgressSpinnerModule,
         FuseCardModule,
         FuseAlertModule,
-        SharedModule
+        SharedModule,
+        MatGridListModule,
+        FuseMasonryModule
     ]
 })
 export class CalculatorModule

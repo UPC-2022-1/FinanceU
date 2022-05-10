@@ -4,7 +4,7 @@ export  class Bono{
     public valorNominal: number;
     public valorComercial: number;
     public numeroAnios: number;
-    public frecuanciaCupon: number;
+    public frecuenciaCupon: number;
     public diasXAnio: number;
     public tipoTasaInteres: boolean;
     public capitalizacion: number;
