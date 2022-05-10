@@ -1,0 +1,59 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <!-- Main -->
+    <div class="flex-auto p-6 sm:p-10">
+        <p>CALCULATOR</p>
+        <!-- CONTENT GOES HERE -->
+        <div
+            class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
+        >
+            <form class="mt-8" [formGroup]="" #signInNgForm="ngForm">
+                <mat-form-field
+                    class="fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
+                >
+                    <mat-label>Valor Nominal </mat-label>
+                    <input
+                        id="valorNominal"
+                        [formControlName]="'valorNominal'"
+                        type="number"
+                        matInput
+                    />
+
+                    <mat-label>Nº de Años </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Frecuencia del cupón </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Dias x Año </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Tipo de Tasa de Interés </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Capitalización </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Tasa de interés </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Tasa anual de descuento </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Imp. a la Renta </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>Fecha de Emisión </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>% Prima </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>% Estructuración </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>% Colocación </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>% Flotación </mat-label>
+                    <input type="text" matInput />
+                    <mat-label>% CAVALI </mat-label>
+                    <input type="text" matInput />
+                </mat-form-field>
+                <mat-form-field
+                    class="fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
+                >
+                    <mat-label>Valor Comercial </mat-label>
+                    <input type="text" matInput />
+                </mat-form-field>
+            </form>
+        </div>
+    </div>
+</div>
