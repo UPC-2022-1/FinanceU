@@ -73,6 +73,9 @@ export const appRoutes: Route[] = [
         resolve    : {
             initialData: InitialDataResolver,
         },
+        data: {
+            layout: 'compact'
+        },
         children   : [
             {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
         ]
