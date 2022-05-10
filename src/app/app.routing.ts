@@ -10,14 +10,14 @@ import { InitialDataResolver } from 'app/app.resolvers';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/example'
-    {path: '', pathMatch : 'full', redirectTo: 'example'},
+    {path: '', pathMatch : 'full', redirectTo: 'calculator'},
 
-    // Redirect signed in user to the '/example'
+    // Redirect signed in user to the '/calculator'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'example'},
+    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'calculator'},
 
     // Auth routes for guests
     {
@@ -77,7 +77,8 @@ export const appRoutes: Route[] = [
             layout: 'compact'
         },
         children   : [
-            {path: 'example', loadChildren: () => import('app/modules/admin/calculator/calculator.module').then(m => m.ExampleModule)},
+            {path: 'calculator', loadChildren: () => import('app/modules/admin/calculator/calculator.module').then(m => m.CalculatorModule)},
+            {path: 'history', loadChildren: () => import('app/modules/admin/history/history.module').then(m => m.HistoryModule)},
         ]
     }
 ];
