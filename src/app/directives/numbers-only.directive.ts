@@ -4,9 +4,8 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
     selector: '[appNumbersOnly]',
 })
 export class NumbersOnlyDirective {
-    //private regex: RegExp = new RegExp(/^-?[0-9]+(\.[0-9]*){0,1}$/g);
-    private regex: RegExp = new RegExp(/^\s*(?=.*[1-9])\d*(?:\.\d{0,2})?\s*$/g);
-    private specialKeys: Array<string> = ['Backspace', 'Tab'];
+    private regex: RegExp = new RegExp(/^\s*(?=.*[0-9])\d*(?:\.\d{0,2})?\s*$/g);
+    private specialKeys: Array<string> = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
 
     constructor(private el: ElementRef) {}
     @HostListener('keydown', ['$event'])
