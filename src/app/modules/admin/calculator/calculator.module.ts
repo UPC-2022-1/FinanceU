@@ -12,21 +12,20 @@ import { SharedModule } from 'app/shared/shared.module';
 import { CalculatorComponent } from './calculator.component';
 import { NumbersOnlyDirective } from 'app/directives/numbers-only.directive';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FuseMasonryModule } from '@fuse/components/masonry';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const calculatorRoutes: Route[] = [
     {
-        path     : '',
-        component: CalculatorComponent
-    }
+        path: '',
+        component: CalculatorComponent,
+    },
 ];
 
 @NgModule({
-    declarations: [
-        CalculatorComponent,
-        NumbersOnlyDirective,
-    ],
-    imports     : [
+    declarations: [CalculatorComponent, NumbersOnlyDirective],
+    imports: [
         RouterModule.forChild(calculatorRoutes),
         MatButtonModule,
         MatCheckboxModule,
@@ -38,9 +37,10 @@ const calculatorRoutes: Route[] = [
         FuseAlertModule,
         SharedModule,
         MatGridListModule,
-        FuseMasonryModule
-    ]
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+    ],
+    providers: [MatDatepickerModule],
 })
-export class CalculatorModule
-{
-}
+export class CalculatorModule {}

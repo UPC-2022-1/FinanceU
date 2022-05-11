@@ -8,293 +8,580 @@
         >
             <fuse-card class="flex flex-col px-8 py-6 pb-4" #fuseCard>
                 <div class="text-lg font-bold">Datos del bono</div>
-                <div class="mt-3 -mx-3 px-8 py-6 pb-4 mt-8">
-                    <form
-                        class="mt-8"
-                        [formGroup]="bonoDataForm"
-                        #bonoDataNgForm="ngForm"
+                <form
+                    class="mt-8"
+                    [formGroup]="bonoDataForm"
+                    #bonoDataNgForm="ngForm"
+                >
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
                     >
-                        <mat-form-field
-                            class="flex fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                        >
-                            <mat-label>Moneda</mat-label>
-                            <input
-                                id="moneda"
-                                type="text"
-                                [formControlName]="'moneda'"
-                                matInput
-                                maxlength="3"
-                                placeholder="USD"
-                                [(ngModel)]="this.bono.moneda"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Valor Nominal</mat-label>
-                            <input
-                                id="valorNominal"
-                                type="text"
-                                [formControlName]="'valorNominal'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.valorNominal"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Valor Comercial</mat-label>
-                            <input
-                                id="valorComercial"
-                                type="text"
-                                [formControlName]="'valorComercial'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.valorComercial"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Nº de Años </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.numeroAnios"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Frecuencia del cupón </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.frecuenciaCupon"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Dias x Año </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.diasXAnio"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Tipo de Tasa de Interés </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.tipoTasaInteres"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Capitalización </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.capitalizacion"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Tasa de interés </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.tasaInteres"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Tasa anual de descuento </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.tasaAnualDescuento"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Imp. a la Renta </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.impuestoRenta"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>Fecha de Emisión </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.fechaEmision"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>% Prima </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.prima"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>% Estructuración </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.estructuracion"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>% Flotación </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.flotacion"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                        <mat-form-field
-                            class="w-full fuse-mat-textarea fuse-mat-dense fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript grow"
-                        >
-                            <mat-label>% CAVALI </mat-label>
-                            <input
-                                id="numeroAnios"
-                                type="text"
-                                [formControlName]="'numeroAnios'"
-                                matInput
-                                maxlength="10"
-                                appNumbersOnly
-                                placeholder="0"
-                                [(ngModel)]="this.bono.cavali"
-                            />
-                            <span matPrefix></span>
-                            <span matSuffix>{{ this.bono.moneda }}</span>
-                        </mat-form-field>
-                    </form>
-                </div>
-            </fuse-card>
+                        <mat-label>Moneda</mat-label>
+                        <input
+                            id="moneda"
+                            type="text"
+                            [formControlName]="'moneda'"
+                            matInput
+                            maxlength="3"
+                            placeholder="USD"
+                            [(ngModel)]="this.bono.moneda"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Valor Nominal</mat-label>
+                        <input
+                            id="valorNominal"
+                            type="text"
+                            [formControlName]="'valorNominal'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.valorNominal"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Valor Comercial</mat-label>
+                        <input
+                            id="valorComercial"
+                            type="text"
+                            [formControlName]="'valorComercial'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.valorComercial"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Nº de Años </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.numeroAnios"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix> años</span>
+                    </mat-form-field>
 
-            <fuse-card class="flex flex-col px-8 py-6 pb-4" #fuseCard>
-                Card
-            </fuse-card>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Frecuencia del cupón</mat-label>
+                        <select
+                            matNativeControl
+                            [(ngModel)]="this.bono.frecuenciaCupon"
+                            [formControlName]="'frecuenciaCupon'"
+                        >
+                            <option value="MENSUAL" selected>Mensual</option>
+                            <option value="BIMESTRAL">Bimestra</option>
+                            <option value="TRIMESTRAL">Trimestral</option>
+                            <option value="CUATRIMESTRAL">Cuatrimestral</option>
+                            <option value="SEMESTRAL">Semestral</option>
+                            <option value="ANUAL">Anual</option>
+                        </select>
+                    </mat-form-field>
 
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Dias x Año </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.diasXAnio"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>dias</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Tipo de Tasa de Interés </mat-label>
+                        <select
+                            matNativeControl
+                            [(ngModel)]="this.bono.tipoTasaInteres"
+                            [formControlName]="'tipoTasaInteres'"
+                        >
+                            <option value="EFECTIVA" selected>Efectiva</option>
+                            <option value="NOMINAL">Nominal</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Capitalización </mat-label>
+                        <select
+                            matNativeControl
+                            [(ngModel)]="this.bono.capitalizacion"
+                            [formControlName]="'capitalizacion'"
+                        >
+                            <option value="DIARIA">Diaria</option>
+                            <option value="QUINCENAL">Quincenal</option>
+                            <option value="MENSUAL" selected>Mensual</option>
+                            <option value="BIMESTRAL">Bimestra</option>
+                            <option value="TRIMESTRAL">Trimestral</option>
+                            <option value="CUATRIMESTRAL">Cuatrimestral</option>
+                            <option value="SEMESTRAL">Semestral</option>
+                            <option value="ANUAL">Anual</option>
+                        </select>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Tasa de interés </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.tasaInteres"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Tasa anual de descuento </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.tasaAnualDescuento"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Imp. a la Renta </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.impuestoRenta"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Fecha de Emisión</mat-label>
+                        <input
+                            readonly
+                            matInput
+                            [matDatepicker]="picker"
+                            [(ngModel)]="this.bono.fechaEmision"
+                            [formControlName]="'fechaEmision'"
+                        />
+                        <mat-hint>MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle
+                            matSuffix
+                            [for]="picker"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>% Prima </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.prima"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>% Estructuración </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.estructuracion"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>% Flotación </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.flotacion"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>% CAVALI </mat-label>
+                        <input
+                            id="numeroAnios"
+                            type="text"
+                            [formControlName]="'numeroAnios'"
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.bono.cavali"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                </form>
+                <form
+                    class="mt-8 flex flex-col"
+                    [formGroup]="bonoDataForm"
+                    #bonoDataNgForm="ngForm"
+                ></form>
+            </fuse-card>
             <fuse-card class="flex flex-col px-8 py-6 pb-4" #fuseCard>
-                Card
+                <div class="text-lg font-bold">Resultados</div>
+                <form
+                    class="mt-8"
+                    [formGroup]="indicadoresDataForm"
+                    #bonoDataNgForm="ngForm"
+                >
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Frecuencia del cupón </mat-label>
+                        <input
+                            id="frecuenciaCupon"
+                            type="text"
+                            [formControlName]="'frecuenciaCupon'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            placeholder="USD"
+                            [(ngModel)]="this.indicadores.frecuenciaCupon"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix> dias </span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Días capitalización </mat-label>
+                        <input
+                            id="diasCapitalizacion"
+                            type="text"
+                            [formControlName]="'diasCapitalizacion'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.diasCapitalizacion"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>dias</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Nº Períodos por Año </mat-label>
+                        <input
+                            id="periodosAnio"
+                            type="text"
+                            [formControlName]="'periodosAnio'"
+                            readonly
+                            matInput
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.periodosAnio"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>periodos</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Nº Total de Periodos </mat-label>
+                        <input
+                            id="totalPeriodos"
+                            type="text"
+                            [formControlName]="'totalPeriodos'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.totalPeriodos"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>periodos</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Tasa efectiva anual </mat-label>
+                        <input
+                            id="tasaEfectivaAnual"
+                            type="text"
+                            [formControlName]="'tasaEfectivaAnual'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.tasaEfectivaAnual"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label
+                            >Tasa efectiva
+                            {{ this.bono.frecuenciaCupon.toLowerCase() }}
+                        </mat-label>
+                        <input
+                            id="tasaEfectiva"
+                            type="text"
+                            [formControlName]="'tasaEfectiva'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.tasaEfectiva.value"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label
+                            >COK {{ this.bono.frecuenciaCupon.toLowerCase() }}
+                        </mat-label>
+                        <input
+                            id="cok"
+                            type="text"
+                            [formControlName]="'cok'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.cok.value"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>%</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Costes Iniciales Emisor </mat-label>
+                        <input
+                            id="costesInicialesEmisor"
+                            type="text"
+                            [formControlName]="'costesInicialesEmisor'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.costesInicialesEmisor"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Costes Iniciales Bonista </mat-label>
+                        <input
+                            id="costesInicialesBonista"
+                            type="text"
+                            [formControlName]="'costesInicialesBonista'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="
+                                this.indicadores.costesInicialesBonista
+                            "
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Precio Actual </mat-label>
+                        <input
+                            id="precioActual"
+                            type="text"
+                            [formControlName]="'precioActual'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.precioActual"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Utilidad / Pérdida </mat-label>
+                        <input
+                            id="utilidadPerdida"
+                            type="text"
+                            [formControlName]="'utilidadPerdida'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.utilidadPerdida"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix>{{ this.bono.moneda }}</span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Duración </mat-label>
+                        <input
+                            id="duracion"
+                            type="text"
+                            [formControlName]="'duracion'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.duracion"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix></span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Convexidad </mat-label>
+                        <input
+                            id="convexidad"
+                            type="text"
+                            [formControlName]="'convexidad'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.convexidad"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix></span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Total </mat-label>
+                        <input
+                            id="total"
+                            type="text"
+                            [formControlName]="'total'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.total"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix></span>
+                    </mat-form-field>
+                    <mat-form-field
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
+                    >
+                        <mat-label>Duración modificada </mat-label>
+                        <input
+                            id="duracionModificada"
+                            type="text"
+                            [formControlName]="'duracionModificada'"
+                            matInput
+                            readonly
+                            maxlength="10"
+                            appNumbersOnly
+                            placeholder="0"
+                            [(ngModel)]="this.indicadores.duracionModificada"
+                        />
+                        <span matPrefix></span>
+                        <span matSuffix></span>
+                    </mat-form-field>
+                </form>
+                <form
+                    class="mt-8 flex flex-col"
+                    [formGroup]="bonoDataForm"
+                    #bonoDataNgForm="ngForm"
+                ></form>
             </fuse-card>
         </div>
     </div>
