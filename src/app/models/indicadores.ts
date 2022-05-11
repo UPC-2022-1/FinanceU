@@ -6,8 +6,8 @@ export class Indicadores {
     periodosAnio: number;
     totalPeriodos: number;
     tasaEfectivaAnual: number;
-    tasaEfectiva: { value: number; type: string };
-    cok: { value: number; type: string };
+    tasaEfectiva: number;
+    cok: number;
     costesInicialesEmisor: number;
     costesInicialesBonista: number;
     precioActual: number;
@@ -16,9 +16,9 @@ export class Indicadores {
     convexidad: number;
     total: number;
     duracionModificada: number;
-    tceaEmisor: { actual: number; real: number };
-    tceaEmisorEscudo: { actual: number; real: number };
-    treaBonista: { actual: number; real: number };
+    tceaEmisor: number;
+    tceaEmisorEscudo: number;
+    treaBonista: number;
     flujoCaja: IteracionCaja[];
     constructor() {
         this.frecuenciaCupon = 0;
@@ -26,8 +26,8 @@ export class Indicadores {
         this.periodosAnio = 0;
         this.totalPeriodos = 0;
         this.tasaEfectivaAnual = 0;
-        this.tasaEfectiva = { value: 0, type: '' };
-        this.cok = { value: 0, type: '' };
+        this.tasaEfectiva = 0;
+        this.cok = 0;
         this.costesInicialesEmisor = 0;
         this.costesInicialesBonista = 0;
         this.precioActual = 0;
@@ -36,9 +36,9 @@ export class Indicadores {
         this.convexidad = 0;
         this.total = 0;
         this.duracionModificada = 0;
-        this.tceaEmisor = { actual: 0, real: 0 };
-        this.tceaEmisorEscudo = { actual: 0, real: 0 };
-        this.treaBonista = { actual: 0, real: 0 };
+        this.tceaEmisor = 0;
+        this.tceaEmisorEscudo = 0;
+        this.treaBonista = 0;
         this.flujoCaja = [];
     }
 }

@@ -21,7 +21,8 @@ import { BonoService } from 'app/services/bono.service';
 })
 export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
     @ViewChild('bonoDataNgForm') bonoDataNgForm: NgForm;
-    columns: number = 16;
+    @ViewChild('indicadoresDataNgForm') indicadoresDataNgForm: NgForm;
+
     alert: { type: FuseAlertType; message: string } = {
         type: 'success',
         message: '',
@@ -40,52 +41,65 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         private _formBuilder: FormBuilder
     ) {}
     ngOnDestroy(): void {}
-    ngOnChanges(): void {
-        this.calculate();
-    }
+    ngOnChanges(): void {}
     ngOnInit(): void {
         // Create the form
+        this.calculate();
         this.bonoDataForm = this._formBuilder.group({
-            moneda: ['USD'],
-            valorNominal: ['0'],
-            valorComercial: ['0'],
-            numeroAnios: ['0'],
-            frecuenciaCupon: ['MENSUAL'],
-            diasXAnio: ['360'],
-            tipoTasaInteres: ['EFECTIVA'],
-            capitalizacion: ['MENSUAL'],
-            tasaInteres: ['0'],
-            tasaAnualDescuento: ['0'],
-            fechaEmision: [new Date()],
-            impuestoRenta: ['0'],
-            prima: ['0'],
-            estructuracion: ['0'],
-            colocacion: ['0'],
-            flotacion: ['0'],
-            cavali: ['0'],
-            tipoBono: ['AMERICANO'],
+            moneda: [this.bono.moneda, Validators.required],
+            valorNominal: [this.bono.valorNominal, Validators.required],
+            valorComercial: [this.bono.valorComercial, Validators.required],
+            numeroAnios: [this.bono.numeroAnios, Validators.required],
+            frecuenciaCupon: [this.bono.frecuenciaCupon, Validators.required],
+            diasXAnio: [this.bono.diasXAnio, Validators.required],
+            tipoTasaInteres: [this.bono.tipoTasaInteres, Validators.required],
+            capitalizacion: [this.bono.capitalizacion, Validators.required],
+            tasaInteres: [this.bono.tasaInteres, Validators.required],
+            tasaAnualDescuento: [
+                this.bono.tasaAnualDescuento,
+                Validators.required,
+            ],
+            fechaEmision: [this.bono.fechaEmision, Validators.required],
+            impuestoRenta: [this.bono.impuestoRenta, Validators.required],
+            prima: [this.bono.prima, Validators.required],
+            estructuracion: [this.bono.estructuracion, Validators.required],
+            colocacion: [this.bono.colocacion, Validators.required],
+            flotacion: [this.bono.flotacion, Validators.required],
+            cavali: [this.bono.cavali, Validators.required],
+            tipoBono: [this.bono.tipoBono, Validators.required],
         });
         this.indicadoresDataForm = this._formBuilder.group({
-            frecuenciaCupon: ['0'],
-            diasCapitalizacion: ['0'],
-            periodosAnio: ['0'],
-            totalPeriodos: ['0'],
-            tasaEfectivaAnual: ['0'],
-            tasaEfectiva: ['0'],
-            cok: ['0'],
-            costesInicialesEmisor: ['0'],
-            costesInicialesBonista: ['0'],
-            precioActual: ['0'],
-            utilidadPerdida: ['0'],
-            duracion: ['0'],
-            convexidad: ['0'],
-            total: ['0'],
-            duracionModificada: ['0'],
-            tceaEmisor: ['0'],
-            tceaEmisorEscudo: ['0'],
-            treaBonista: ['0'],
+            frecuenciaCupon: [this.indicadores.frecuenciaCupon],
+            diasCapitalizacion: [this.indicadores.diasCapitalizacion],
+            periodosAnio: [this.indicadores.periodosAnio],
+            totalPeriodos: [this.indicadores.totalPeriodos],
+            tasaEfectivaAnual: [this.indicadores.tasaEfectivaAnual],
+            tasaEfectiva: [this.indicadores.tasaEfectiva],
+            cok: [this.indicadores.cok],
+            costesInicialesEmisor: [this.indicadores.costesInicialesEmisor],
+            costesInicialesBonista: [this.indicadores.costesInicialesBonista],
+            precioActual: [this.indicadores.precioActual],
+            utilidadPerdida: [this.indicadores.utilidadPerdida],
+            duracion: [this.indicadores.duracion],
+            convexidad: [this.indicadores.convexidad],
+            total: [this.indicadores.total],
+            duracionModificada: [this.indicadores.duracionModificada],
+            tceaEmisor: [this.indicadores.tceaEmisor],
+            tceaEmisorEscudo: [this.indicadores.tceaEmisorEscudo],
+            treaBonista: [this.indicadores.treaBonista],
+            flujoCaja: [this.indicadores.flujoCaja],
         });
-        this.calculate();
+
+        this.bonoDataForm.valueChanges.subscribe((val) => {
+            this.bonoDataForm.patchValue(val, { emitEvent: false });
+            this.bono = this.bonoDataForm.value;
+            this.calculate();
+            this.indicadoresDataForm.setValue(this.indicadores);
+        });
+
+        this.indicadoresDataForm.valueChanges.subscribe((val) => {
+            this.indicadoresDataForm.patchValue(val, { emitEvent: false });
+        });
     }
 
     calculate(): void {
@@ -100,6 +114,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     break;
                 case 'TRIMESTRAL':
                     this.indicadores.frecuenciaCupon = 90;
+                    break;
+                case 'CUATRIMESTRAL':
+                    this.indicadores.frecuenciaCupon = 120;
                     break;
                 case 'SEMESTRAL':
                     this.indicadores.frecuenciaCupon = 180;
@@ -174,8 +191,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         try {
             switch (this.bono.tipoTasaInteres) {
                 case 'EFECTIVA':
-                    this.indicadores.tasaEfectivaAnual =
-                        this.bono.tasaInteres / 100;
+                    this.indicadores.tasaEfectivaAnual = this.bono.tasaInteres;
                     break;
                 case 'NOMINAL':
                     this.indicadores.tasaEfectivaAnual =
@@ -197,12 +213,11 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             this.showAlert = true;
         }
         try {
-            this.indicadores.tasaEfectiva.type = this.bono.frecuenciaCupon;
-            this.indicadores.tasaEfectiva.value =
+            this.indicadores.tasaEfectiva =
                 (1 + this.indicadores.tasaEfectivaAnual / 100) **
                     (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
                 1;
-            this.indicadores.tasaEfectiva.value *= 100;
+            this.indicadores.tasaEfectiva *= 100;
         } catch (error) {
             this.alert = {
                 type: 'error',
@@ -211,12 +226,11 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             this.showAlert = true;
         }
         try {
-            this.indicadores.cok.type = this.bono.frecuenciaCupon;
-            this.indicadores.cok.value =
+            this.indicadores.cok =
                 (1 + this.bono.tasaAnualDescuento / 100) **
                     (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
                 1;
-            this.indicadores.cok.value *= 100;
+            this.indicadores.cok *= 100;
         } catch (error) {
             this.alert = {
                 type: 'error',
