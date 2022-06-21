@@ -3,88 +3,47 @@
     <div class="flex-auto p-6 sm:p-10">
         <div class="text-lg font-bold">Calculator</div>
         <!-- CONTENT GOES HERE -->
-        <div
-            class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
-        >
-            <fuse-card class="flex flex-col px-8 py-6 pb-4" #fuseCard>
-                <div class="text-lg font-bold">Datos del bono</div>
-                <form
-                    class="mt-8"
-                    [formGroup]="bonoDataForm"
-                    #bonoDataNgForm="ngForm"
-                >
+        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
+            <div class="text-lg font-bold m-2">Datos del bono</div>
+            <fuse-card class="flex flex-col px-8 py-6 pb-4 mx-2" #fuseCard>
+                <form class="mt-8" [formGroup]="bonoDataForm" #bonoDataNgForm="ngForm">
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Moneda</mat-label>
-                        <input
-                            id="moneda"
-                            type="text"
-                            [formControlName]="'moneda'"
-                            matInput
-                            maxlength="3"
-                            placeholder="USD"
-                        />
+                        <input id="moneda" type="text" [formControlName]="'moneda'" matInput maxlength="3"
+                            placeholder="USD" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Valor Nominal</mat-label>
-                        <input
-                            id="valorNominal"
-                            type="text"
-                            [formControlName]="'valorNominal'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="valorNominal" type="text" [formControlName]="'valorNominal'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Valor Comercial</mat-label>
-                        <input
-                            id="valorComercial"
-                            type="text"
-                            [formControlName]="'valorComercial'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="valorComercial" type="text" [formControlName]="'valorComercial'" matInput
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Nº de Años </mat-label>
-                        <input
-                            id="numeroAnios"
-                            type="text"
-                            [formControlName]="'numeroAnios'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="numeroAnios" type="text" [formControlName]="'numeroAnios'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix> años</span>
                     </mat-form-field>
 
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Frecuencia del cupón</mat-label>
-                        <select
-                            matNativeControl
-                            [formControlName]="'frecuenciaCupon'"
-                        >
+                        <select matNativeControl [formControlName]="'frecuenciaCupon'">
                             <option value="MENSUAL" selected>Mensual</option>
                             <option value="BIMESTRAL">Bimestral</option>
                             <option value="TRIMESTRAL">Trimestral</option>
@@ -95,41 +54,25 @@
                     </mat-form-field>
 
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Dias x Año </mat-label>
-                        <input
-                            id="diasXAnio"
-                            type="text"
-                            [formControlName]="'diasXAnio'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="diasXAnio" type="text" [formControlName]="'diasXAnio'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>dias</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Tipo de Tasa de Interés </mat-label>
-                        <select
-                            matNativeControl
-                            [formControlName]="'tipoTasaInteres'"
-                        >
+                        <select matNativeControl [formControlName]="'tipoTasaInteres'">
                             <option value="EFECTIVA" selected>Efectiva</option>
                             <option value="NOMINAL">Nominal</option>
                         </select>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Capitalización </mat-label>
-                        <select
-                            matNativeControl
-                            [formControlName]="'capitalizacion'"
-                        >
+                        <select matNativeControl [formControlName]="'capitalizacion'">
                             <option value="DIARIA">Diaria</option>
                             <option value="QUINCENAL">Quincenal</option>
                             <option value="MENSUAL" selected>Mensual</option>
@@ -141,420 +84,316 @@
                         </select>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Tasa de interés </mat-label>
-                        <input
-                            id="tasaInteres"
-                            type="text"
-                            [formControlName]="'tasaInteres'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="tasaInteres" type="text" [formControlName]="'tasaInteres'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Tasa anual de descuento </mat-label>
-                        <input
-                            id="tasaAnualDescuento"
-                            type="text"
-                            [formControlName]="'tasaAnualDescuento'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="tasaAnualDescuento" type="text" [formControlName]="'tasaAnualDescuento'" matInput
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Imp. a la Renta </mat-label>
-                        <input
-                            id="impuestoRenta"
-                            type="text"
-                            [formControlName]="'impuestoRenta'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="impuestoRenta" type="text" [formControlName]="'impuestoRenta'" matInput
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Fecha de Emisión</mat-label>
-                        <input
-                            readonly
-                            matInput
-                            [matDatepicker]="picker"
-                            [formControlName]="'fechaEmision'"
-                        />
+                        <input readonly matInput [matDatepicker]="picker" [formControlName]="'fechaEmision'" />
                         <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle
-                            matSuffix
-                            [for]="picker"
-                        ></mat-datepicker-toggle>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
 
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>% Prima </mat-label>
-                        <input
-                            id="prima"
-                            type="text"
-                            [formControlName]="'prima'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="prima" type="text" [formControlName]="'prima'" matInput maxlength="10" appNumbersOnly
+                            placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>% Estructuración </mat-label>
-                        <input
-                            id="estructuracion"
-                            type="text"
-                            [formControlName]="'estructuracion'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="estructuracion" type="text" [formControlName]="'estructuracion'" matInput
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>% Colocación </mat-label>
-                        <input
-                            id="colocacion"
-                            type="text"
-                            [formControlName]="'colocacion'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="colocacion" type="text" [formControlName]="'colocacion'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>% Flotación </mat-label>
-                        <input
-                            id="flotacion"
-                            type="text"
-                            [formControlName]="'flotacion'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="flotacion" type="text" [formControlName]="'flotacion'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>% CAVALI </mat-label>
-                        <input
-                            id="cavali"
-                            type="text"
-                            [formControlName]="'cavali'"
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="cavali" type="text" [formControlName]="'cavali'" matInput maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                 </form>
             </fuse-card>
-            <fuse-card class="flex flex-col px-8 py-6 pb-4" #fuseCard>
-                <div class="text-lg font-bold">Resultados</div>
-                <form
-                    class="mt-8"
-                    [formGroup]="indicadoresDataForm"
-                    #indicadoresDataNgForm="ngForm"
-                >
+            <div class="text-lg font-bold m-2">Resultados</div>
+            <fuse-card class="flex flex-col px-8 py-6 pb-4 mx-2" #fuseCard>
+                <form class="mt-8" [formGroup]="indicadoresDataForm" #indicadoresDataNgForm="ngForm">
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Frecuencia del cupón </mat-label>
-                        <input
-                            id="frecuenciaCupon"
-                            type="text"
-                            [formControlName]="'frecuenciaCupon'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            placeholder="USD"
-                        />
+                        <input id="frecuenciaCupon" type="text" [formControlName]="'frecuenciaCupon'" matInput readonly
+                            maxlength="10" placeholder="USD" />
                         <span matPrefix></span>
                         <span matSuffix> dias </span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Días capitalización </mat-label>
-                        <input
-                            id="diasCapitalizacion"
-                            type="text"
-                            [formControlName]="'diasCapitalizacion'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="diasCapitalizacion" type="text" [formControlName]="'diasCapitalizacion'" matInput
+                            readonly maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>dias</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Nº Períodos por Año </mat-label>
-                        <input
-                            id="periodosAnio"
-                            type="text"
-                            [formControlName]="'periodosAnio'"
-                            readonly
-                            matInput
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="periodosAnio" type="text" [formControlName]="'periodosAnio'" readonly matInput
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>periodos</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Nº Total de Periodos </mat-label>
-                        <input
-                            id="totalPeriodos"
-                            type="text"
-                            [formControlName]="'totalPeriodos'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="totalPeriodos" type="text" [formControlName]="'totalPeriodos'" matInput readonly
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>periodos</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Tasa efectiva anual </mat-label>
-                        <input
-                            id="tasaEfectivaAnual"
-                            type="text"
-                            [formControlName]="'tasaEfectivaAnual'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="tasaEfectivaAnual" type="text" [formControlName]="'tasaEfectivaAnual'" matInput
+                            readonly maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
-                        <mat-label
-                            >Tasa efectiva
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
+                        <mat-label>Tasa efectiva
                             {{ this.bono.frecuenciaCupon.toLowerCase() }}
                         </mat-label>
-                        <input
-                            id="tasaEfectiva"
-                            type="text"
-                            [formControlName]="'tasaEfectiva'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="tasaEfectiva" type="text" [formControlName]="'tasaEfectiva'" matInput readonly
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
-                        <mat-label
-                            >COK {{ this.bono.frecuenciaCupon.toLowerCase() }}
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
+                        <mat-label>COK {{ this.bono.frecuenciaCupon.toLowerCase() }}
                         </mat-label>
-                        <input
-                            id="cok"
-                            type="text"
-                            [formControlName]="'cok'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="cok" type="text" [formControlName]="'cok'" matInput readonly maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>%</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Costes Iniciales Emisor </mat-label>
-                        <input
-                            id="costesInicialesEmisor"
-                            type="text"
-                            [formControlName]="'costesInicialesEmisor'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="costesInicialesEmisor" type="text" [formControlName]="'costesInicialesEmisor'"
+                            matInput readonly maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Costes Iniciales Bonista </mat-label>
-                        <input
-                            id="costesInicialesBonista"
-                            type="text"
-                            [formControlName]="'costesInicialesBonista'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="costesInicialesBonista" type="text" [formControlName]="'costesInicialesBonista'"
+                            matInput readonly maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Precio Actual </mat-label>
-                        <input
-                            id="precioActual"
-                            type="text"
-                            [formControlName]="'precioActual'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="precioActual" type="text" [formControlName]="'precioActual'" matInput readonly
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Utilidad / Pérdida </mat-label>
-                        <input
-                            id="utilidadPerdida"
-                            type="text"
-                            [formControlName]="'utilidadPerdida'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="utilidadPerdida" type="text" [formControlName]="'utilidadPerdida'" matInput readonly
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix>{{ this.bono.moneda }}</span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Duración </mat-label>
-                        <input
-                            id="duracion"
-                            type="text"
-                            [formControlName]="'duracion'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="duracion" type="text" [formControlName]="'duracion'" matInput readonly maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix></span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Convexidad </mat-label>
-                        <input
-                            id="convexidad"
-                            type="text"
-                            [formControlName]="'convexidad'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="convexidad" type="text" [formControlName]="'convexidad'" matInput readonly
+                            maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix></span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Total </mat-label>
-                        <input
-                            id="total"
-                            type="text"
-                            [formControlName]="'total'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="total" type="text" [formControlName]="'total'" matInput readonly maxlength="10"
+                            appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix></span>
                     </mat-form-field>
                     <mat-form-field
-                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript"
-                    >
+                        class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                         <mat-label>Duración modificada </mat-label>
-                        <input
-                            id="duracionModificada"
-                            type="text"
-                            [formControlName]="'duracionModificada'"
-                            matInput
-                            readonly
-                            maxlength="10"
-                            appNumbersOnly
-                            placeholder="0"
-                        />
+                        <input id="duracionModificada" type="text" [formControlName]="'duracionModificada'" matInput
+                            readonly maxlength="10" appNumbersOnly placeholder="0" />
                         <span matPrefix></span>
                         <span matSuffix></span>
                     </mat-form-field>
                 </form>
+            </fuse-card>
+            <div class="text-lg font-bold m-2">Flujo de Caja</div>
+            <fuse-card class="flex flex-col px-8 py-6 pb-4 mx-2" #fuseCard>
+                <table mat-table [dataSource]="this.indicadores.flujoCaja" matSort>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ i }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fechaProgramada">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Programada </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.fechaProgramada | date:
+                            'shortDate' }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="inflacionAnual">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inflación Anual
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.inflacionAnual }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="inflacion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Inflación {{this.bono.frecuenciaCupon}}
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.inflacion?.value }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="plazoGracia">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.plazoGracia }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.bono }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cuponInteres">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuponInteres }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cuota">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuota }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="amortizacion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.amortizacion }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="prima">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.prima }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="escudo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.escudo }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="flujoEmisor">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisor }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="flujoEmisorEscudo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisorEscudo }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="flujoBonista">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoBonista }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="flujoAct">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoAct }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="faXPlazo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.faXPlazo }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="factorConvexidad">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.factorConvexidad }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
             </fuse-card>
         </div>
     </div>

@@ -15,22 +15,24 @@ export class IteracionCaja {
     flujoAct: number;
     faXPlazo: number;
     factorConvexidad: number;
-    constructor() {
-        this.fechaProgramada = new Date();
-        this.inflacionAnual = 0;
-        this.inflacion = { value: 0, type: '' };
-        this.plazoGracia = 'S';
-        this.bono = 0;
-        this.cuponInteres = 0;
-        this.cuota = 0;
-        this.amortizacion = 0;
-        this.prima = 0;
-        this.escudo = 0;
-        this.flujoEmisor = 0;
-        this.flujoEmisorEscudo = 0;
-        this.flujoBonista = 0;
-        this.flujoAct = 0;
-        this.faXPlazo = 0;
-        this.factorConvexidad = 0;
+    constructor(
+        interacionCaja?: IteracionCaja
+    ) {
+        this.fechaProgramada = interacionCaja.fechaProgramada;
+        this.inflacionAnual = interacionCaja.inflacionAnual;
+        this.inflacion = interacionCaja.inflacion;
+        this.plazoGracia = interacionCaja.plazoGracia;
+        this.bono = interacionCaja.bono;
+        this.cuponInteres = interacionCaja.cuponInteres;
+        this.cuota = interacionCaja.cuota;
+        this.amortizacion = interacionCaja.amortizacion;
+        this.prima = interacionCaja.prima;
+        this.escudo = interacionCaja.escudo;
+        this.flujoEmisor = interacionCaja.flujoEmisor;
+        this.flujoEmisorEscudo = interacionCaja.flujoEmisorEscudo;
+        this.flujoBonista = interacionCaja.flujoBonista;
+        this.flujoAct = interacionCaja.flujoAct;
+        this.faXPlazo = interacionCaja.faXPlazo;
+        this.factorConvexidad = interacionCaja.factorConvexidad;
     }
 }

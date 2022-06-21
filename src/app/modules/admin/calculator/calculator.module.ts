@@ -15,6 +15,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
 
 const calculatorRoutes: Route[] = [
     {
@@ -40,7 +41,8 @@ const calculatorRoutes: Route[] = [
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatTableModule,
     ],
     providers: [MatDatepickerModule],
 })
-export class CalculatorModule {}
+export class CalculatorModule { }

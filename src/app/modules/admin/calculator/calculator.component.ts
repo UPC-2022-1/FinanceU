@@ -11,6 +11,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { Bono } from 'app/models/bono';
 import { Indicadores } from 'app/models/indicadores';
+import { IteracionCaja } from 'app/models/iteracionCaja';
 import { BonoService } from 'app/services/bono.service';
 
 @Component({
@@ -28,11 +29,33 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         message: '',
     };
 
+
     public bono: Bono = new Bono();
     public indicadores: Indicadores = new Indicadores();
     public bonoDataForm: FormGroup;
     public indicadoresDataForm: FormGroup;
     showAlert: boolean = false;
+
+    public displayedColumns: string[] = [
+        'position',
+        'fechaProgramada',
+        'inflacionAnual',
+        'inflacion',
+        'plazoGracia',
+        'bono',
+        'cuponInteres',
+        'cuota',
+        'amortizacion',
+        'prima',
+        'escudo',
+        'flujoEmisor',
+        'flujoEmisorEscudo',
+        'flujoBonista',
+        'flujoAct',
+        'faXPlazo',
+        'factorConvexidad',
+    ];
+
     /**
      * Constructor
      */
@@ -276,6 +299,46 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             this.showAlert = true;
         }
         try {
+            this.indicadores.flujoCaja = [];
+            this.indicadores.flujoCaja.push(new IteracionCaja(
+                {
+                    fechaProgramada: this.bono.fechaEmision,
+                    inflacionAnual: null,
+                    inflacion: null,
+                    plazoGracia: null,
+                    bono: null,
+                    cuponInteres: null,
+                    cuota: null,
+                    amortizacion: null,
+                    prima: null,
+                    escudo: null,
+                    flujoEmisor: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
+                    flujoEmisorEscudo: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
+                    flujoBonista: this.bono.valorComercial - this.indicadores.costesInicialesBonista,
+                    flujoAct: null,
+                    faXPlazo: null,
+                    factorConvexidad: null,
+                }));
+            for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
+                this.indicadores.flujoCaja.push(new IteracionCaja({
+                    fechaProgramada: new Date(this.bono.fechaEmision.getTime() + (i * this.indicadores.frecuenciaCupon * 24 * 60 * 60 * 1000)),
+                    inflacionAnual: 0,
+                    inflacion: { value: 0, type: this.bono.frecuenciaCupon },
+                    plazoGracia: 'S',
+                    bono: null,
+                    cuponInteres: null,
+                    cuota: null,
+                    amortizacion: null,
+                    prima: null,
+                    escudo: null,
+                    flujoEmisor: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
+                    flujoEmisorEscudo: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
+                    flujoBonista: this.bono.valorComercial - this.indicadores.costesInicialesBonista,
+                    flujoAct: null,
+                    faXPlazo: null,
+                    factorConvexidad: null,
+                }));
+            }
         }
         catch (error) {
             this.alert = {
