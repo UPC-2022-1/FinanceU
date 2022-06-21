@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
@@ -27,7 +28,8 @@ export class AuthSignUpComponent implements OnInit {
     constructor(
         private _authService: AuthService,
         private _formBuilder: FormBuilder,
-        private _router: Router
+        private _router: Router,
+        public dialog: MatDialog
     ) {
     }
 
@@ -82,8 +84,16 @@ export class AuthSignUpComponent implements OnInit {
             .subscribe(
                 (response) => {
 
-                    // Navigate to the confirmation required page
-                    this._router.navigateByUrl('/sign-in');
+                    const dialogRef = this.dialog.open(DialogSuccessComponent, {
+                        width: '250px',
+                        data: { name: this.signUpForm.get('name').value, email: this.signUpForm.get('email').value },
+                    });
+
+                    dialogRef.afterClosed().subscribe((result) => {
+                        if (result) {
+                            this._router.navigateByUrl('/sign-in');
+                        }
+                    });
                 },
                 (response) => {
                     console.log(response);
@@ -108,3 +118,22 @@ export class AuthSignUpComponent implements OnInit {
     }
 }
 
+export interface DialogData {
+    name: string;
+    email: string;
+}
+
+@Component({
+    selector: 'dialog-success',
+    templateUrl: 'dialog-success.html',
+})
+export class DialogSuccessComponent {
+    constructor(
+        public dialogRef: MatDialogRef<DialogSuccessComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    ) { }
+
+    accept(): void {
+        this.dialogRef.close(true);
+    }
+}
