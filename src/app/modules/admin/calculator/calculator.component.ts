@@ -39,9 +39,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
     constructor(
         private _bonoService: BonoService,
         private _formBuilder: FormBuilder
-    ) {}
-    ngOnDestroy(): void {}
-    ngOnChanges(): void {}
+    ) { }
+    ngOnDestroy(): void { }
+    ngOnChanges(): void { }
     ngOnInit(): void {
         // Create the form
         this.calculate();
@@ -197,9 +197,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     this.indicadores.tasaEfectivaAnual =
                         (1 +
                             this.bono.tasaInteres /
-                                100 /
-                                (this.bono.diasXAnio /
-                                    this.indicadores.diasCapitalizacion)) **
+                            100 /
+                            (this.bono.diasXAnio /
+                                this.indicadores.diasCapitalizacion)) **
                         (this.bono.diasXAnio /
                             this.indicadores.diasCapitalizacion);
                     this.indicadores.tasaEfectivaAnual *= 100;
@@ -215,7 +215,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         try {
             this.indicadores.tasaEfectiva =
                 (1 + this.indicadores.tasaEfectivaAnual / 100) **
-                    (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
+                (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
                 1;
             this.indicadores.tasaEfectiva *= 100;
         } catch (error) {
@@ -228,7 +228,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         try {
             this.indicadores.cok =
                 (1 + this.bono.tasaAnualDescuento / 100) **
-                    (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
+                (this.indicadores.frecuenciaCupon / this.bono.diasXAnio) -
                 1;
             this.indicadores.cok *= 100;
         } catch (error) {
@@ -269,6 +269,15 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 ((this.bono.flotacion + this.bono.cavali) / 100) *
                 this.bono.valorComercial;
         } catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+        try {
+        }
+        catch (error) {
             this.alert = {
                 type: 'error',
                 message: error.message,
