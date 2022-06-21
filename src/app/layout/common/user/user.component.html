@@ -9,6 +9,7 @@
 <mat-menu [xPosition]="'before'" #userActions="matMenu">
     <button mat-menu-item style="pointer-events:none;">
         <span class="flex flex-col leading-none">
+            <span>{{user.name}}</span>
             <span class="mt-1.5 text-md font-medium">{{user.email}}</span>
         </span>
     </button>

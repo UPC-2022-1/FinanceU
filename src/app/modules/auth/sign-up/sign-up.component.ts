@@ -44,7 +44,7 @@ export class AuthSignUpComponent implements OnInit {
             name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required],
-            company: [''],
+            company: ['FinanceU'],
             agreements: ['', Validators.requiredTrue]
         }
         );
@@ -60,8 +60,16 @@ export class AuthSignUpComponent implements OnInit {
     signUp(): void {
         // Do nothing if the form is invalid
         if (this.signUpForm.invalid) {
+            if (this.signUpForm.controls.agreements.invalid) {
+                this.alert = {
+                    type: 'error',
+                    message: 'Please accept the terms and conditions.'
+                };
+                this.showAlert = true;
+            }
             return;
         }
+
 
         // Disable the form
         this.signUpForm.disable();
@@ -73,24 +81,30 @@ export class AuthSignUpComponent implements OnInit {
         this._authService.signUp(this.signUpForm.value)
             .subscribe(
                 (response) => {
+
+                    // Navigate to the confirmation required page
+                    this._router.navigateByUrl('/sign-in');
                 },
                 (response) => {
+                    console.log(response);
 
                     // Re-enable the form
                     this.signUpForm.enable();
 
                     // Reset the form
-                    this.signUpNgForm.resetForm();
+                    // this.signUpNgForm.resetForm();
 
                     // Set the alert
                     this.alert = {
                         type: 'error',
-                        message: 'Something went wrong, please try again.'
+                        message: response.error
                     };
 
                     // Show the alert
                     this.showAlert = true;
+
                 }
             );
     }
 }
+

@@ -1,8 +1,9 @@
 /* eslint-disable */
-export const user = {
-    id    : 'cfaad35d-07a3-4447-a6c3-d8c3d54fd5df',
-    name  : 'Brian Hughes',
-    email : 'hughes.brian@company.com',
-    avatar: 'assets/images/defaults/avatar.png',
+export let user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {
+    id: 'DefaultId',
+    name: 'DefaultName',
+    email: 'Default@ExtraAhorro.tk',
+    company: 'ExtraAhorro',
+    avatar: 'assets/images/avatars/default.jpg',
     status: 'online'
-};
+  };

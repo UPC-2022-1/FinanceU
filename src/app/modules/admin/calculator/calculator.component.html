@@ -7,7 +7,7 @@
             <div class="text-lg font-bold m-2">Tipo de bono</div>
             <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2 mainContainer" #fuseCard>
                 <mat-label></mat-label>
-                <select matNativeControl [(ngModel)]="tipoBono">
+                <select matNativeControl [(ngModel)]="tipoBono" (change)="compute()">
                     <option value="AMERICANO" selected>Americano</option>
                     <option value="ALEMAN">Aleman</option>
                     <option value="FRANCES">Frances</option>

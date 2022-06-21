@@ -111,18 +111,23 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             tceaEmisor: [this.indicadores.tceaEmisor],
             tceaEmisorEscudo: [this.indicadores.tceaEmisorEscudo],
             treaBonista: [this.indicadores.treaBonista],
+            flujoCaja: [this.indicadores.flujoCaja]
         });
 
         this.bonoDataForm.valueChanges.subscribe((val) => {
             this.bonoDataForm.patchValue(val, { emitEvent: false });
-            this.bono = this.bonoDataForm.value;
-            this.calculate();
-            this.indicadoresDataForm.setValue(this.indicadores);
+            this.compute();
         });
 
         this.indicadoresDataForm.valueChanges.subscribe((val) => {
             this.indicadoresDataForm.patchValue(val, { emitEvent: false });
         });
+    }
+
+    compute(): void {
+        this.bono = this.bonoDataForm.value;
+        this.calculate();
+        this.indicadoresDataForm.setValue(this.indicadores);
     }
 
     calculate(): void {
@@ -341,17 +346,30 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
 
                 flujoActual.bonoIndexado = flujoActual.bono * (1 + flujoActual.inflacion.value);
                 flujoActual.cuponInteres = - flujoActual.bonoIndexado * this.indicadores.tasaEfectiva / 100;
-                flujoActual.prima = i === this.indicadores.totalPeriodos ? this.bono.valorNominal * this.bono.prima / 100 : 0;
                 flujoActual.escudo = - flujoActual.cuponInteres * this.bono.impuestoRenta / 100;
 
                 switch (this.tipoBono) {
                     case 'AMERICANO':
                         flujoActual.amortizacion = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado : 0;
                         flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 : flujoActual.cuponInteres + flujoActual.amortizacion;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? this.bono.valorNominal * this.bono.prima / 100 : 0;
                         break;
                     case 'ALEMAN':
+                        flujoActual.amortizacion = flujoActual.plazoGracia === 'T' || flujoActual.plazoGracia === 'P' ?
+                            0 : - flujoActual.bonoIndexado / (this.indicadores.totalPeriodos - i + 1);
+                        flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 :
+                            flujoActual.plazoGracia === 'P' ? flujoActual.cuponInteres : flujoActual.cuponInteres + flujoActual.amortizacion;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
                         break;
                     case 'FRANCES':
+                        const PV = flujoActual.bonoIndexado;
+                        const rate = this.indicadores.tasaEfectiva / 100;
+                        const nper = this.indicadores.totalPeriodos - i + 1;
+                        flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 :
+                            flujoActual.plazoGracia === 'P' ? 0 : (PV * rate) / (1 - (1 + rate) ** -nper);
+                        flujoActual.amortizacion = flujoActual.plazoGracia === 'T' || flujoActual.plazoGracia === 'P' ?
+                            0 : - flujoActual.cuota - flujoActual.cuponInteres;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
                         break;
                 }
 
