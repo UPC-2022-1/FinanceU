@@ -316,7 +316,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     escudo: null,
                     flujoEmisor: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
                     flujoEmisorEscudo: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
-                    flujoBonista: this.bono.valorComercial - this.indicadores.costesInicialesBonista,
+                    flujoBonista: - this.bono.valorComercial - this.indicadores.costesInicialesBonista,
                     flujoAct: null,
                     faXPlazo: null,
                     factorConvexidad: null,
@@ -370,6 +370,49 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
 
                 this.indicadores.flujoCaja.push(flujoActual);
             }
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+
+        try {
+            for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
+                this.indicadores.precioActual += this.indicadores.flujoCaja[i].flujoBonista / ((1 + this.indicadores.cok / 100) ** i);
+            }
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+
+        try {
+            this.indicadores.utilidadPerdida = this.indicadores.flujoCaja[0].flujoBonista + this.indicadores.precioActual;
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            let acomFlujoAct: number = 0;
+            let acomFaxPlazo: number = 0;
+            for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
+                acomFlujoAct += this.indicadores.flujoCaja[i].flujoAct;
+                acomFaxPlazo += this.indicadores.flujoCaja[i].faXPlazo;
+            }
+            this.indicadores.duracion = acomFaxPlazo / acomFlujoAct;
         }
         catch (error) {
             this.alert = {
