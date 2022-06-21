@@ -4,6 +4,15 @@
         <div class="text-lg font-bold">Calculator</div>
         <!-- CONTENT GOES HERE -->
         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
+            <div class="text-lg font-bold m-2">Tipo de bono</div>
+            <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2 mainContainer" #fuseCard>
+                <mat-label></mat-label>
+                        <select matNativeControl [(ngModel)]="tipoBono">
+                            <option value="AMERICANO" selected>Americano</option>
+                            <option value="ALEMAN">Aleman</option>
+                            <option value="FRANCES">Frances</option>
+                        </select>
+            </fuse-card>
             <div class="text-lg font-bold m-2">Datos del bono</div>
             <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2 mainContainer" #fuseCard>
                 <form class="space-x-2 space-y-2" [formGroup]="bonoDataForm" #bonoDataNgForm="ngForm">
@@ -312,86 +321,92 @@
                     <ng-container matColumnDef="inflacion">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Inflación {{this.bono.frecuenciaCupon}}
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.inflacion?.value.toFixed(2)}}
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.inflacion?.value.toFixed(3)}}
                             {{ i === 0 ? '' : '%' }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="plazoGracia">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bono
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
                         </th>
                         <td mat-cell *matCellDef="let element; let i = index"> {{ element.plazoGracia }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="bono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Bono
+                        </th>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.bono?.toFixed(2)  }} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bonoIndexado">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Bono Indexado
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.bono }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.bonoIndexado?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="cuponInteres">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Cupon (Interes)
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuponInteres }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuponInteres?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="cuota">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Cuota
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuota }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.cuota?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="amortizacion">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Amort.
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.amortizacion }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.amortizacion?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="prima">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Prima
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.prima }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.prima?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="escudo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Escudo
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.escudo }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.escudo?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="flujoEmisor">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Flujo Emisor
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisor }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisor?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="flujoEmisorEscudo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Flujo Emisor c/Escudo
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisorEscudo }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoEmisorEscudo?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="flujoBonista">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Flujo Bonista
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoBonista }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoBonista?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="flujoAct">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Flujo Act.
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoAct }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.flujoAct?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="faXPlazo">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> FA x Plazo
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.faXPlazo }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.faXPlazo?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <ng-container matColumnDef="factorConvexidad">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header>Factor p/Convexidad
                         </th>
-                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.factorConvexidad }} </td>
+                        <td mat-cell *matCellDef="let element; let i = index"> {{ element.factorConvexidad?.toFixed(2)  }} </td>
                     </ng-container>
 
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

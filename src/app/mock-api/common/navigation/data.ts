@@ -4,14 +4,14 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id: 'calculator',
-        title: 'Calculator',
+        title: 'Calculadora',
         type: 'basic',
         icon: 'heroicons_outline:calculator',
         link: '/example',
     },
     {
         id: 'history',
-        title: 'History',
+        title: 'Historial',
         type: 'basic',
         icon: 'heroicons_outline:archive',
         link: '/history',
@@ -20,14 +20,14 @@ export const defaultNavigation: FuseNavigationItem[] = [
 export const compactNavigation: FuseNavigationItem[] = [
     {
         id: 'calculator',
-        title: 'Calculator',
+        title: 'Calculadora',
         type: 'basic',
         icon: 'heroicons_outline:calculator',
         link: '/calculator',
     },
     {
         id: 'history',
-        title: 'History',
+        title: 'Historial',
         type: 'basic',
         icon: 'heroicons_outline:archive',
         link: '/history',

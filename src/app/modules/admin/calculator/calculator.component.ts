@@ -29,8 +29,8 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         message: '',
     };
 
-
     public bono: Bono = new Bono();
+    public tipoBono: 'AMERICANO' | 'ALEMAN' | 'FRANCES' = 'AMERICANO';
     public indicadores: Indicadores = new Indicadores();
     public bonoDataForm: FormGroup;
     public indicadoresDataForm: FormGroup;
@@ -43,6 +43,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         'inflacion',
         'plazoGracia',
         'bono',
+        'bonoIndexado',
         'cuponInteres',
         'cuota',
         'amortizacion',
@@ -307,6 +308,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     inflacion: null,
                     plazoGracia: null,
                     bono: null,
+                    bonoIndexado: null,
                     cuponInteres: null,
                     cuota: null,
                     amortizacion: null,
@@ -320,12 +322,16 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     factorConvexidad: null,
                 }));
             for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
-                this.indicadores.flujoCaja.push(new IteracionCaja({
+                const flujoActual = new IteracionCaja({
                     fechaProgramada: new Date(this.bono.fechaEmision.getTime() + (i * this.indicadores.frecuenciaCupon * 24 * 60 * 60 * 1000)),
                     inflacionAnual: 0,
                     inflacion: { value: 0, type: this.bono.frecuenciaCupon },
                     plazoGracia: 'S',
-                    bono: null,
+                    bono: i === 1 ? this.bono.valorNominal :
+                        (this.indicadores.flujoCaja[i - 1].plazoGracia === 'T' ?
+                            this.indicadores.flujoCaja[i - 1].bonoIndexado - this.indicadores.flujoCaja[i - 1].cuponInteres :
+                            this.indicadores.flujoCaja[i - 1].bonoIndexado + this.indicadores.flujoCaja[i - 1].amortizacion),
+                    bonoIndexado: null,
                     cuponInteres: null,
                     cuota: null,
                     amortizacion: null,
@@ -337,7 +343,22 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     flujoAct: null,
                     faXPlazo: null,
                     factorConvexidad: null,
-                }));
+                });
+
+                flujoActual.bonoIndexado = flujoActual.bono * (1 + flujoActual.inflacion.value);
+                flujoActual.cuponInteres = flujoActual.bonoIndexado * this.indicadores.tasaEfectiva / 100;
+                flujoActual.prima = i === this.indicadores.totalPeriodos ? this.bono.valorNominal * this.bono.prima / 100 : 0;
+                flujoActual.escudo = flujoActual.bonoIndexado * this.bono.impuestoRenta / 100;
+
+                switch (this.tipoBono) {
+                    case 'AMERICANO':
+                        break;
+                    case 'ALEMAN':
+                        break;
+                    case 'FRANCES':
+                        break;
+                }
+                this.indicadores.flujoCaja.push(flujoActual);
             }
         }
         catch (error) {
@@ -347,5 +368,21 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             };
             this.showAlert = true;
         }
+
+
+        this.indicadores.cok = parseFloat(this.indicadores.cok.toFixed(3));
+        this.indicadores.tasaEfectiva = parseFloat(this.indicadores.tasaEfectiva.toFixed(3));
+        this.indicadores.tasaEfectivaAnual = parseFloat(this.indicadores.tasaEfectivaAnual.toFixed(5));
+        this.indicadores.costesInicialesBonista = parseFloat(this.indicadores.costesInicialesBonista.toFixed(2));
+        this.indicadores.costesInicialesEmisor = parseFloat(this.indicadores.costesInicialesEmisor.toFixed(2));
+        this.indicadores.precioActual = parseFloat(this.indicadores.precioActual.toFixed(2));
+        this.indicadores.utilidadPerdida = parseFloat(this.indicadores.utilidadPerdida.toFixed(2));
+        this.indicadores.duracion = parseFloat(this.indicadores.duracion.toFixed(2));
+        this.indicadores.convexidad = parseFloat(this.indicadores.convexidad.toFixed(2));
+        this.indicadores.total = parseFloat(this.indicadores.total.toFixed(2));
+        this.indicadores.duracionModificada = parseFloat(this.indicadores.duracionModificada.toFixed(2));
+        this.indicadores.tceaEmisor = parseFloat(this.indicadores.tceaEmisor.toFixed(5));
+        this.indicadores.tceaEmisorEscudo = parseFloat(this.indicadores.tceaEmisorEscudo.toFixed(5));
+        this.indicadores.treaBonista = parseFloat(this.indicadores.treaBonista.toFixed(5));
     }
 }

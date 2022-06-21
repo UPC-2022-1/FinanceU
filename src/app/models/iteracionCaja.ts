@@ -4,6 +4,7 @@ export class IteracionCaja {
     inflacion: { value: number; type: string };
     plazoGracia: string;
     bono: number;
+    bonoIndexado: number;
     cuponInteres: number;
     cuota: number;
     amortizacion: number;
@@ -23,6 +24,7 @@ export class IteracionCaja {
         this.inflacion = interacionCaja.inflacion;
         this.plazoGracia = interacionCaja.plazoGracia;
         this.bono = interacionCaja.bono;
+        this.bonoIndexado = interacionCaja.bonoIndexado;
         this.cuponInteres = interacionCaja.cuponInteres;
         this.cuota = interacionCaja.cuota;
         this.amortizacion = interacionCaja.amortizacion;
