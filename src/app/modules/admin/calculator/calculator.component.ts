@@ -111,7 +111,6 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             tceaEmisor: [this.indicadores.tceaEmisor],
             tceaEmisorEscudo: [this.indicadores.tceaEmisorEscudo],
             treaBonista: [this.indicadores.treaBonista],
-            flujoCaja: [this.indicadores.flujoCaja],
         });
 
         this.bonoDataForm.valueChanges.subscribe((val) => {
@@ -417,6 +416,45 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             this.showAlert = true;
         }
 
+        try {
+            let acomFlujoAct: number = 0;
+            let acomFactConvex: number = 0;
+            for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
+                acomFlujoAct += this.indicadores.flujoCaja[i].flujoAct;
+                acomFactConvex += this.indicadores.flujoCaja[i].factorConvexidad;
+            }
+            const temp = this.bono.diasXAnio / this.indicadores.frecuenciaCupon;
+            this.indicadores.convexidad = acomFactConvex / (((1 + this.indicadores.cok / 100) ** 2) * acomFlujoAct * (temp ** 2));
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            this.indicadores.total = this.indicadores.duracion + this.indicadores.convexidad;
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            this.indicadores.duracionModificada = this.indicadores.duracion / (1 + this.indicadores.cok / 100);
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
 
         this.indicadores.cok = parseFloat(this.indicadores.cok.toFixed(3));
         this.indicadores.tasaEfectiva = parseFloat(this.indicadores.tasaEfectiva.toFixed(3));
