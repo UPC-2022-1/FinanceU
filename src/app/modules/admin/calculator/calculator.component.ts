@@ -337,27 +337,37 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     amortizacion: null,
                     prima: null,
                     escudo: null,
-                    flujoEmisor: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
-                    flujoEmisorEscudo: this.bono.valorComercial - this.indicadores.costesInicialesEmisor,
-                    flujoBonista: this.bono.valorComercial - this.indicadores.costesInicialesBonista,
+                    flujoEmisor: null,
+                    flujoEmisorEscudo: null,
+                    flujoBonista: null,
                     flujoAct: null,
                     faXPlazo: null,
                     factorConvexidad: null,
                 });
 
                 flujoActual.bonoIndexado = flujoActual.bono * (1 + flujoActual.inflacion.value);
-                flujoActual.cuponInteres = flujoActual.bonoIndexado * this.indicadores.tasaEfectiva / 100;
+                flujoActual.cuponInteres = - flujoActual.bonoIndexado * this.indicadores.tasaEfectiva / 100;
                 flujoActual.prima = i === this.indicadores.totalPeriodos ? this.bono.valorNominal * this.bono.prima / 100 : 0;
-                flujoActual.escudo = flujoActual.bonoIndexado * this.bono.impuestoRenta / 100;
+                flujoActual.escudo = - flujoActual.cuponInteres * this.bono.impuestoRenta / 100;
 
                 switch (this.tipoBono) {
                     case 'AMERICANO':
+                        flujoActual.amortizacion = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado : 0;
+                        flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 : flujoActual.cuponInteres + flujoActual.amortizacion;
                         break;
                     case 'ALEMAN':
                         break;
                     case 'FRANCES':
                         break;
                 }
+
+                flujoActual.flujoEmisor = flujoActual.cuota + flujoActual.prima;
+                flujoActual.flujoEmisorEscudo = flujoActual.flujoEmisor + flujoActual.escudo;
+                flujoActual.flujoBonista = - flujoActual.flujoEmisor;
+                flujoActual.flujoAct = flujoActual.flujoBonista / ((1 + this.indicadores.cok / 100) ** i);
+                flujoActual.faXPlazo = flujoActual.flujoAct * i * this.indicadores.frecuenciaCupon / this.bono.diasXAnio;
+                flujoActual.factorConvexidad = flujoActual.flujoAct * i * (1 + i);
+
                 this.indicadores.flujoCaja.push(flujoActual);
             }
         }
