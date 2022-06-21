@@ -218,14 +218,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     this.indicadores.tasaEfectivaAnual = this.bono.tasaInteres;
                     break;
                 case 'NOMINAL':
-                    this.indicadores.tasaEfectivaAnual =
-                        (1 +
-                            this.bono.tasaInteres /
-                            100 /
-                            (this.bono.diasXAnio /
-                                this.indicadores.diasCapitalizacion)) **
-                        (this.bono.diasXAnio /
-                            this.indicadores.diasCapitalizacion);
+                    const temp = this.bono.diasXAnio / this.indicadores.diasCapitalizacion;
+                    const i = this.bono.tasaInteres / 100;
+                    this.indicadores.tasaEfectivaAnual = (1 + i / temp) ** (temp) - 1;
                     this.indicadores.tasaEfectivaAnual *= 100;
                     break;
             }
