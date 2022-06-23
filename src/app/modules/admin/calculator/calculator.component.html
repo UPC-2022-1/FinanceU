@@ -27,12 +27,14 @@
         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
             <div class="text-lg font-bold m-2">Tipo de bono</div>
             <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2" #fuseCard>
-                <mat-label></mat-label>
-                <select matNativeControl [(ngModel)]="tipoBono" (change)="compute()">
-                    <option value="AMERICANO" selected>Americano</option>
-                    <option value="ALEMAN">Aleman</option>
-                    <option value="FRANCES">Frances</option>
-                </select>
+                <mat-form-field appearance="fill">
+                    <mat-label>Bono</mat-label>
+                    <select matNativeControl required [(ngModel)]="tipoBono" (change)="compute()">
+                        <option value="AMERICANO" selected>Americano</option>
+                        <option value="ALEMAN">Aleman</option>
+                        <option value="FRANCES">Frances</option>
+                    </select>
+                </mat-form-field>
             </fuse-card>
             <mat-accordion class="m-2">
                 <mat-expansion-panel (opened)="panelBonista = true" (closed)="panelBonista = false" [expanded]="true">
