@@ -37,6 +37,10 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
     public indicadoresDataForm: FormGroup;
     showAlert: boolean = false;
 
+    panelBonista = true;
+    panelIndicadores = true;
+    panelCajaFlujo = true;
+
     public displayedColumns: string[] = [
         'position',
         'fechaProgramada',
