@@ -4,18 +4,3 @@
     width: 100%;
     height: 100%;
 }
-
-.mainContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.mainContainer>* {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-self: center;
-}

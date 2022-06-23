@@ -26,7 +26,7 @@
         <!-- CONTENT GOES HERE -->
         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
             <div class="text-lg font-bold m-2">Tipo de bono</div>
-            <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2 mainContainer" #fuseCard>
+            <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2" #fuseCard>
                 <mat-label></mat-label>
                 <select matNativeControl [(ngModel)]="tipoBono" (change)="compute()">
                     <option value="AMERICANO" selected>Americano</option>
@@ -44,7 +44,7 @@
 
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2 mainContainer" #fuseCard>
+                    <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2" #fuseCard>
                         <form class="space-x-2 space-y-2" [formGroup]="bonoDataForm" #bonoDataNgForm="ngForm">
                             <mat-form-field
                                 class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
@@ -210,7 +210,7 @@
 
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <fuse-card class="flex flex-col px-8 py-6 pb-4 mx-2 mainContainer" #fuseCard>
+                    <fuse-card class="flex flex-col px-8 py-6 pb-4 mx-2 " #fuseCard>
                         <form class="space-x-2 space-y-2" [formGroup]="indicadoresDataForm"
                             #indicadoresDataNgForm="ngForm">
                             <mat-form-field

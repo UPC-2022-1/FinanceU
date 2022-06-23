@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Bono } from './models/bono';
 
 @Component({
     selector   : 'app-root',
@@ -12,5 +13,6 @@ export class AppComponent
      */
     constructor()
     {
+        localStorage.setItem('bono', JSON.stringify(new Bono()));
     }
 }

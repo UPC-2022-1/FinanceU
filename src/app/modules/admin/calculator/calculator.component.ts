@@ -31,7 +31,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         message: '',
     };
 
-    public bono: Bono = new Bono();
+    public bono: Bono = JSON.parse(localStorage.getItem('bono'));
     public tipoBono: 'AMERICANO' | 'ALEMAN' | 'FRANCES' = 'AMERICANO';
     public indicadores: Indicadores = new Indicadores();
     public bonoDataForm: FormGroup;
@@ -326,6 +326,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     factorConvexidad: null,
                 }));
             for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
+                this.bono.fechaEmision = new Date(this.bono.fechaEmision);
                 const flujoActual = new IteracionCaja({
                     fechaProgramada: new Date(this.bono.fechaEmision.getTime() + (i * this.indicadores.frecuenciaCupon * 24 * 60 * 60 * 1000)),
                     inflacionAnual: 0,
@@ -389,6 +390,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             }
         }
         catch (error) {
+            console.log(this.bono);
+            console.log(this.indicadores);
+            console.log(error);
             this.alert = {
                 type: 'error',
                 message: error.message,
