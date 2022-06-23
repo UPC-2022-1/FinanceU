@@ -13,6 +13,7 @@ import { Bono } from 'app/models/bono';
 import { Indicadores } from 'app/models/indicadores';
 import { IteracionCaja } from 'app/models/iteracionCaja';
 import { BonoService } from 'app/services/bono.service';
+import { irr } from 'financial';
 
 @Component({
     selector: 'calculator',
@@ -366,9 +367,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                         const rate = this.indicadores.tasaEfectiva / 100;
                         const nper = this.indicadores.totalPeriodos - i + 1;
                         flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 :
-                            flujoActual.plazoGracia === 'P' ? 0 : (PV * rate) / (1 - (1 + rate) ** -nper);
+                            flujoActual.plazoGracia === 'P' ? 0 : - (PV * rate) / (1 - (1 + rate) ** -nper);
                         flujoActual.amortizacion = flujoActual.plazoGracia === 'T' || flujoActual.plazoGracia === 'P' ?
-                            0 : - flujoActual.cuota - flujoActual.cuponInteres;
+                            0 : flujoActual.cuota - flujoActual.cuponInteres;
                         flujoActual.prima = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
                         break;
                 }
@@ -465,6 +466,42 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
 
         try {
             this.indicadores.duracionModificada = this.indicadores.duracion / (1 + this.indicadores.cok / 100);
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            const IRR = irr(this.indicadores.flujoCaja.map(x => x.flujoEmisor));
+            this.indicadores.tceaEmisor = ((IRR + 1) ** (this.bono.diasXAnio / this.indicadores.frecuenciaCupon) - 1) * 100;
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            const IRR = irr(this.indicadores.flujoCaja.map(x => x.flujoEmisorEscudo));
+            this.indicadores.tceaEmisorEscudo = ((IRR + 1) ** (this.bono.diasXAnio / this.indicadores.frecuenciaCupon) - 1) * 100;
+        }
+        catch (error) {
+            this.alert = {
+                type: 'error',
+                message: error.message,
+            };
+            this.showAlert = true;
+        }
+
+        try {
+            const IRR = irr(this.indicadores.flujoCaja.map(x => x.flujoBonista));
+            this.indicadores.treaBonista = ((IRR + 1) ** (this.bono.diasXAnio / this.indicadores.frecuenciaCupon) - 1) * 100;
         }
         catch (error) {
             this.alert = {
