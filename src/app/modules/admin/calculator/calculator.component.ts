@@ -352,7 +352,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     case 'AMERICANO':
                         flujoActual.amortizacion = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado : 0;
                         flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 : flujoActual.cuponInteres + flujoActual.amortizacion;
-                        flujoActual.prima = i === this.indicadores.totalPeriodos ? this.bono.valorNominal * this.bono.prima / 100 : 0;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? - this.bono.valorNominal * this.bono.prima / 100 : 0;
                         break;
                     case 'ALEMAN':
                         flujoActual.amortizacion = flujoActual.plazoGracia === 'T' || flujoActual.plazoGracia === 'P' ?
