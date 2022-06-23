@@ -36,7 +36,6 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
     public indicadores: Indicadores = new Indicadores();
     public bonoDataForm: FormGroup;
     public indicadoresDataForm: FormGroup;
-    showAlert: boolean = false;
 
     panelBonista = true;
     panelIndicadores = true;
@@ -74,6 +73,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
     ngOnDestroy(): void { }
     ngOnChanges(): void { }
     ngOnInit(): void {
+        this._fuseAlertService.dismiss('alertBox');
         // Create the form
         this.calculate();
         this.bonoDataForm = this._formBuilder.group({
@@ -139,7 +139,6 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
 
     calculate(): void {
         try {
-            this.showAlert = false;
             switch (this.bono.frecuenciaCupon) {
                 case 'MENSUAL':
                     this.indicadores.frecuenciaCupon = 30;
@@ -167,10 +166,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
-            this.showAlert = false;
             switch (this.bono.capitalizacion) {
                 case 'DIARIA':
                     this.indicadores.diasCapitalizacion = 1;
@@ -201,7 +199,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.periodosAnio =
@@ -211,7 +209,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.totalPeriodos =
@@ -221,7 +219,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             switch (this.bono.tipoTasaInteres) {
@@ -240,7 +238,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.tasaEfectiva =
@@ -253,7 +251,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.cok =
@@ -266,7 +264,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.costesInicialesEmisor =
@@ -281,7 +279,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.costesInicialesBonista =
@@ -292,7 +290,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.costesInicialesBonista =
@@ -303,7 +301,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
         try {
             this.indicadores.flujoCaja = [];
@@ -395,7 +393,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
 
@@ -409,7 +407,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
 
@@ -421,7 +419,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -438,7 +436,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -456,7 +454,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -467,7 +465,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -478,7 +476,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -490,7 +488,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -502,7 +500,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         try {
@@ -514,7 +512,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 type: 'error',
                 message: error.message,
             };
-            this.showAlert = true;
+            this._fuseAlertService.show('alertBox');
         }
 
         this.indicadores.cok = parseFloat(this.indicadores.cok.toFixed(3));
@@ -537,7 +535,6 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             type: 'success',
             message: 'Guardado correctamente',
         };
-        this.showAlert = true;
         this._fuseAlertService.show('alertBox');
     }
 }
