@@ -1,7 +1,28 @@
 <div class="flex flex-col flex-auto min-w-0">
+    <!-- Alert -->
+    <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'soft'" [showIcon]="true" [type]="alert.type" [name]="'alertBox'"
+        [dismissible]="true" [@shake]="alert.type === 'error'">
+        {{alert.message}}
+    </fuse-alert>
     <!-- Main -->
     <div class="flex-auto p-6 sm:p-10">
-        <div class="text-lg font-bold">Calculator</div>
+        <!-- Header -->
+        <div
+            class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-3 sm:px-10 border-primary-300 bg-card bg-transparent">
+            <div class="grow min-w-0">
+                <!-- Title -->
+                <div class="mt-2">
+                    <h3 class="text-2xl font-bold md:text-3xl tracking-tight leading-7 sm:leading-10 truncate">
+                        <div class="text-lg font-bold">Calculator</div>
+                    </h3>
+                </div>
+            </div>
+            <div class="flex-none items-center">
+                <button mat-flat-button class="grow" color="primary" (click)="save()">
+                    Guardar Bono
+                </button>
+            </div>
+        </div>
         <!-- CONTENT GOES HERE -->
         <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
             <div class="text-lg font-bold m-2">Tipo de bono</div>
@@ -179,7 +200,8 @@
                 </mat-expansion-panel>
             </mat-accordion>
             <mat-accordion class="m-2">
-                <mat-expansion-panel (opened)="panelIndicadores = true" (closed)="panelIndicadores = false" [expanded]="true">
+                <mat-expansion-panel (opened)="panelIndicadores = true" (closed)="panelIndicadores = false"
+                    [expanded]="true">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <div class="text-lg font-bold m-2">Resultados</div>
@@ -346,7 +368,8 @@
             </mat-accordion>
 
             <mat-accordion class="m-2">
-                <mat-expansion-panel (opened)="panelCajaFlujo = true" (closed)="panelCajaFlujo = false" [expanded]="true">
+                <mat-expansion-panel (opened)="panelCajaFlujo = true" (closed)="panelCajaFlujo = false"
+                    [expanded]="true">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             <div class="text-lg font-bold m-2">Flujo de Caja</div>

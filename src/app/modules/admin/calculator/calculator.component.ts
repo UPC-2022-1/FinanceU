@@ -8,12 +8,13 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
+import { FuseAlertService, FuseAlertType } from '@fuse/components/alert';
 import { Bono } from 'app/models/bono';
 import { Indicadores } from 'app/models/indicadores';
 import { IteracionCaja } from 'app/models/iteracionCaja';
 import { BonoService } from 'app/services/bono.service';
 import { irr } from 'financial';
+import { FuseAlertModule } from '@fuse/components/alert';
 
 @Component({
     selector: 'calculator',
@@ -67,7 +68,8 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
      */
     constructor(
         private _bonoService: BonoService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private _fuseAlertService: FuseAlertService
     ) { }
     ngOnDestroy(): void { }
     ngOnChanges(): void { }
@@ -529,5 +531,13 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         this.indicadores.tceaEmisor = parseFloat(this.indicadores.tceaEmisor.toFixed(5));
         this.indicadores.tceaEmisorEscudo = parseFloat(this.indicadores.tceaEmisorEscudo.toFixed(5));
         this.indicadores.treaBonista = parseFloat(this.indicadores.treaBonista.toFixed(5));
+    }
+    save(): void {
+        this.alert = {
+            type: 'success',
+            message: 'Guardado correctamente',
+        };
+        this.showAlert = true;
+        this._fuseAlertService.show('alertBox');
     }
 }
