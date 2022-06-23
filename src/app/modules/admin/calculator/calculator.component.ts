@@ -359,7 +359,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                             0 : - flujoActual.bonoIndexado / (this.indicadores.totalPeriodos - i + 1);
                         flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 :
                             flujoActual.plazoGracia === 'P' ? flujoActual.cuponInteres : flujoActual.cuponInteres + flujoActual.amortizacion;
-                        flujoActual.prima = i === this.indicadores.totalPeriodos ? flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
                         break;
                     case 'FRANCES':
                         const PV = flujoActual.bonoIndexado;
@@ -369,7 +369,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                             flujoActual.plazoGracia === 'P' ? 0 : (PV * rate) / (1 - (1 + rate) ** -nper);
                         flujoActual.amortizacion = flujoActual.plazoGracia === 'T' || flujoActual.plazoGracia === 'P' ?
                             0 : - flujoActual.cuota - flujoActual.cuponInteres;
-                        flujoActual.prima = i === this.indicadores.totalPeriodos ? flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
+                        flujoActual.prima = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado * this.bono.prima / 100 : 0;
                         break;
                 }
 
