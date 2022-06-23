@@ -326,9 +326,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     factorConvexidad: null,
                 }));
             for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
-                this.bono.fechaEmision = new Date(this.bono.fechaEmision);
+                const fechaEmision = new Date(this.bono.fechaEmision);
                 const flujoActual = new IteracionCaja({
-                    fechaProgramada: new Date(this.bono.fechaEmision.getTime() + (i * this.indicadores.frecuenciaCupon * 24 * 60 * 60 * 1000)),
+                    fechaProgramada: new Date(fechaEmision.getTime() + (i * this.indicadores.frecuenciaCupon * 24 * 60 * 60 * 1000)),
                     inflacionAnual: 0,
                     inflacion: { value: 0, type: this.bono.frecuenciaCupon },
                     plazoGracia: 'S',
