@@ -1,5 +1,6 @@
-export  class Bono{
+export class Bono {
 
+    public tipoBono: 'AMERICANO' | 'ALEMAN' | 'FRANCES';
     public moneda: string;
     public valorNominal: number;
     public valorComercial: number;
@@ -17,9 +18,9 @@ export  class Bono{
     public colocacion: number;
     public flotacion: number;
     public cavali: number;
-    public tipoBono: string;
 
-    constructor(){
+    constructor() {
+        this.tipoBono = 'AMERICANO';
         this.moneda = 'USD';
         this.valorNominal = 1000;
         this.valorComercial = 1050;

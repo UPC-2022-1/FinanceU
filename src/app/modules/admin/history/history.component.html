@@ -1,16 +1,43 @@
 <div class="flex flex-col flex-auto min-w-0">
+    <!-- Alert -->
+    <fuse-alert class="mt-8 -mb-4 pb-6" [appearance]="'soft'" [showIcon]="true" [type]="alert.type" [name]="'alertBox'"
+        [dismissible]="true" [@shake]="alert.type === 'error'">
+        {{alert.message}}
+    </fuse-alert>
     <!-- Main -->
-    <div class="flex-auto p-6 sm:p-10">
-    <p>HISTORY</p>
-        <!-- CONTENT GOES HERE -->
+    <div class="flex-auto px-6 pb-4">
+        <!-- Header -->
         <div
-            class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl"
-        >
-            <form
-                class="mt-8"
-                [formGroup]=""
-                #signInNgForm="ngForm"
-            ></form>
+            class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between px-6 sm:px-10 border-primary-300 bg-card bg-transparent">
+            <div class="grow min-w-0">
+                <!-- Title -->
+                <div class="mt-2">
+                    <h3 class="text-2xl font-bold md:text-3xl tracking-tight leading-7 sm:leading-10 truncate">
+                        <div class="text-lg font-bold">History</div>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <!-- CONTENT GOES HERE -->
+        <div class="h-400 min-h-400 max-h-400 border-2 border-dashed border-gray-300 rounded-2xl">
+            <fuse-card class="flex flex-col m-2 px-4 py-2 pb-4 mx-2" *ngFor="let item of data;let i = index">
+                <div class="grid grid-cols-4 gap-4 content-center">
+                    <div class="content-center">{{i + 1}}</div>
+                    <div class="content-center">{{item.data.tipoBono}}</div>
+                    <div class="content-center">{{item.createdAt | date:'medium'}}</div>
+                    <div class="content-center"> <button mat-flat-button class="grow" color="primary"
+                            (click)="cargar(item.data)">
+                            Cargar Bono
+                        </button>
+                    </div>
+                </div>
+            </fuse-card>
+            <fuse-card class="flex flex-col m-2 px-4 py-2 pb-4 mx-2"
+                *ngIf="data === undefined || data === null || data?.length === 0">
+                <h4 class="content-center text-2xtracking-tight leading-7 truncate">
+                    <div class="content-center text-center">No hay bonos que mostrar</div>
+                </h4>
+            </fuse-card>
         </div>
     </div>
 </div>

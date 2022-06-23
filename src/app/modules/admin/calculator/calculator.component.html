@@ -24,17 +24,19 @@
             </div>
         </div>
         <!-- CONTENT GOES HERE -->
-        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2">
+        <div class="border-2 border-dashed border-gray-300 rounded-2xl p-2" ng-disabled="true">
             <div class="text-lg font-bold m-2">Tipo de bono</div>
             <fuse-card class="flex flex-col px-4 py-2 pb-4 mx-2" #fuseCard>
-                <mat-form-field appearance="fill">
-                    <mat-label>Bono</mat-label>
-                    <select matNativeControl required [(ngModel)]="tipoBono" (change)="compute()">
-                        <option value="AMERICANO" selected>Americano</option>
-                        <option value="ALEMAN">Aleman</option>
-                        <option value="FRANCES">Frances</option>
-                    </select>
-                </mat-form-field>
+                <form class="space-x-2 space-y-2 object-cover" [formGroup]="bonoDataForm" #bonoDataNgForm="ngForm">
+                    <mat-form-field appearance="fill" class="fuse-mat-rounded" [style.width.%]="100">
+                        <mat-label>Bono</mat-label>
+                        <select matNativeControl required [formControlName]="'tipoBono'" (change)="compute()">
+                            <option value="AMERICANO">Americano</option>
+                            <option value="ALEMAN">Aleman</option>
+                            <option value="FRANCES">Frances</option>
+                        </select>
+                    </mat-form-field>
+                </form>
             </fuse-card>
             <mat-accordion class="m-2">
                 <mat-expansion-panel (opened)="panelBonista = true" (closed)="panelBonista = false" [expanded]="true">
@@ -416,13 +418,13 @@
                             <ng-container matColumnDef="plazoGracia">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Plazo de Gracia
                                 </th>
-                                <td mat-cell *matCellDef="let element; let i = index"> {{ element.plazoGracia }} </td>
+                                <td mat-cell *matCellDef="let element; let i = index"> {{ element?.plazoGracia }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="bono">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Bono
                                 </th>
-                                <td mat-cell *matCellDef="let element; let i = index"> {{ element.bono?.toFixed(2) }}
+                                <td mat-cell *matCellDef="let element; let i = index"> {{ element?.bono }}
                                 </td>
                             </ng-container>
 

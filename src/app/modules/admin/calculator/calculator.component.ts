@@ -31,11 +31,12 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         message: '',
     };
 
-    public bono: Bono = JSON.parse(localStorage.getItem('bono'));
-    public tipoBono: 'AMERICANO' | 'ALEMAN' | 'FRANCES' = 'AMERICANO';
+    public bono: Bono;
     public indicadores: Indicadores = new Indicadores();
     public bonoDataForm: FormGroup;
     public indicadoresDataForm: FormGroup;
+
+    public loading: boolean = false;
 
     panelBonista = true;
     panelIndicadores = true;
@@ -69,12 +70,10 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         private _bonoService: BonoService,
         private _formBuilder: FormBuilder,
         private _fuseAlertService: FuseAlertService
-    ) { }
-    ngOnDestroy(): void { }
-    ngOnChanges(): void { }
-    ngOnInit(): void {
-        this._fuseAlertService.dismiss('alertBox');
-        // Create the form
+    ) {
+        this.loading = true;
+
+        this.bono = JSON.parse(localStorage.getItem('bono'));
         this.calculate();
         this.bonoDataForm = this._formBuilder.group({
             moneda: [this.bono.moneda, Validators.required],
@@ -120,6 +119,12 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             treaBonista: [this.indicadores.treaBonista],
             flujoCaja: [this.indicadores.flujoCaja]
         });
+    }
+    ngOnDestroy(): void { }
+    ngOnChanges(): void { }
+    ngOnInit(): void {
+        this._fuseAlertService.dismiss('alertBox');
+        // Create the form
 
         this.bonoDataForm.valueChanges.subscribe((val) => {
             this.bonoDataForm.patchValue(val, { emitEvent: false });
@@ -129,6 +134,8 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         this.indicadoresDataForm.valueChanges.subscribe((val) => {
             this.indicadoresDataForm.patchValue(val, { emitEvent: false });
         });
+
+        this.loading = false;
     }
 
     compute(): void {
@@ -354,7 +361,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                 flujoActual.cuponInteres = - flujoActual.bonoIndexado * this.indicadores.tasaEfectiva / 100;
                 flujoActual.escudo = - flujoActual.cuponInteres * this.bono.impuestoRenta / 100;
 
-                switch (this.tipoBono) {
+                switch (this.bono.tipoBono) {
                     case 'AMERICANO':
                         flujoActual.amortizacion = i === this.indicadores.totalPeriodos ? - flujoActual.bonoIndexado : 0;
                         flujoActual.cuota = flujoActual.plazoGracia === 'T' ? 0 : flujoActual.cuponInteres + flujoActual.amortizacion;
@@ -534,11 +541,28 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         this.indicadores.tceaEmisorEscudo = parseFloat(this.indicadores.tceaEmisorEscudo.toFixed(5));
         this.indicadores.treaBonista = parseFloat(this.indicadores.treaBonista.toFixed(5));
     }
+
     save(): void {
-        this.alert = {
-            type: 'success',
-            message: 'Guardado correctamente',
-        };
-        this._fuseAlertService.show('alertBox');
+        this.loading = true;
+        this.bonoDataForm.disable();
+        this._bonoService.saveBono(this.bono).subscribe(() => {
+            this.alert = {
+                type: 'success',
+                message: 'Guardado correctamente',
+            };
+            this._fuseAlertService.show('alertBox');
+            this.bonoDataForm.enable();
+            this.loading = false;
+        },
+            () => {
+                document.getElementsByTagName('html')[0].getAttribute('lang');
+                this.alert = {
+                    type: 'error',
+                    message: 'Error en el servidor',
+                };
+                this._fuseAlertService.show('alertBox');
+                this.loading = false;
+            });
+
     }
 }
