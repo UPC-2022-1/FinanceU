@@ -14,6 +14,7 @@ import { Indicadores } from 'app/models/indicadores';
 import { IteracionCaja } from 'app/models/iteracionCaja';
 import { BonoService } from 'app/services/bono.service';
 import { irr } from 'financial';
+import { npv } from 'financial';
 import { FuseAlertModule } from '@fuse/components/alert';
 
 @Component({
@@ -409,9 +410,8 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
 
 
         try {
-            for (let i = 1; i < this.indicadores.totalPeriodos + 1; i++) {
-                this.indicadores.precioActual += this.indicadores.flujoCaja[i].flujoBonista / ((1 + this.indicadores.cok / 100) ** i);
-            }
+            this.indicadores.precioActual = npv(this.indicadores.cok / 100,
+                this.indicadores.flujoCaja.slice(1, this.indicadores.flujoCaja.length).map(x => x.flujoBonista));
         }
         catch (error) {
             this.alert = {

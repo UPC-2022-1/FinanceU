@@ -154,7 +154,7 @@
                                 class="w-80 fuse-mat-textarea fuse-mat-emphasized-affix fuse-mat-rounded fuse-mat-no-subscript">
                                 <mat-label>Fecha de Emisión</mat-label>
                                 <input readonly matInput [matDatepicker]="picker" [formControlName]="'fechaEmision'" />
-                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-hint>DD/MM/YYYY</mat-hint>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -394,7 +394,7 @@
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Programada </th>
                                 <td mat-cell *matCellDef="let element; let i = index"> {{ element.fechaProgramada |
                                     date:
-                                    'shortDate' }} </td>
+                                    'dd/MM/YY' }} </td>
                             </ng-container>
 
                             <ng-container matColumnDef="inflacionAnual">
