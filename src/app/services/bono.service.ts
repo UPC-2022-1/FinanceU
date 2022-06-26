@@ -8,7 +8,7 @@ import { user as userData } from 'app/mock-api/common/user/data';
     providedIn: 'root'
 })
 export class BonoService {
-    readonly url: string = 'https://api.extraahorro.tk/bono';
+    readonly url: string = 'https://extraahorro.azurewebsites.net/bono';
     readonly userID: string = userData.id;
     constructor(private _httpClient: HttpClient) {
     }

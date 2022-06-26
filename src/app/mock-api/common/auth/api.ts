@@ -66,7 +66,7 @@ export class AuthMockApi {
             .reply(({ request }) => new Observable((suscriber) => {
                 const { email, password } = request.body;
                 const accessToken = this._generateJWTToken();
-                return this._httpClient.post('https://api.easycloud.gq/login', { email, password, accessToken }).subscribe(
+                return this._httpClient.post('https://extraahorro.azurewebsites.net/login', { email, password, accessToken }).subscribe(
                     (response) => {
                         if (response['status'] === 'success') {
                             this._user = cloneDeep(response['payload']['user']);
@@ -131,7 +131,7 @@ export class AuthMockApi {
         this._fuseMockApiService
             .onPost('api/auth/sign-up', 1500)
             .reply(({ request }) => new Observable((suscriber) => {
-                this._httpClient.post('https://api.easycloud.gq/register', request.body).subscribe(
+                this._httpClient.post('https://extraahorro.azurewebsites.net/register', request.body).subscribe(
                     (response) => {
                         if (response['status'] === 'success') {
                             suscriber.next(
