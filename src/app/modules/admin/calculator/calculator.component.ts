@@ -31,6 +31,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
         type: 'success',
         message: '',
     };
+    showAlert: boolean = false;
 
     public bono: Bono;
     public indicadores: Indicadores = new Indicadores();
@@ -121,7 +122,9 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             flujoCaja: [this.indicadores.flujoCaja]
         });
     }
-    ngOnDestroy(): void { }
+    ngOnDestroy(): void {
+        this._fuseAlertService.dismiss('alertBox');
+    }
     ngOnChanges(): void { }
     ngOnInit(): void {
         this._fuseAlertService.dismiss('alertBox');
@@ -552,6 +555,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
             };
             this._fuseAlertService.show('alertBox');
             this.bonoDataForm.enable();
+            this.showAlert = true;
             this.loading = false;
         },
             () => {
@@ -561,6 +565,7 @@ export class CalculatorComponent implements OnInit, OnDestroy, OnChanges {
                     message: 'Error en el servidor',
                 };
                 this._fuseAlertService.show('alertBox');
+                this.showAlert = true;
                 this.loading = false;
             });
 

@@ -17,16 +17,15 @@ export class HistoryComponent implements OnInit {
         message: '',
     };
     data: any[];
+    showAlert: boolean = false;
     /**
      * Constructor
      */
     constructor(private _bonoService: BonoService,
-        private _fuseAlertService: FuseAlertService,
         private _router: Router,
     ) { }
 
     ngOnInit(): void {
-        this._fuseAlertService.dismiss('alertBox');
         this._bonoService.getBonos().subscribe((data) => {
             this.data = data;
         });
